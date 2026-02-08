@@ -1,0 +1,6 @@
+AzAd-BrowserKit/
+AzAd-Smart-Downloader/
+.vscode/
+*.code-workspace
+docs-backup/
+html_template/
