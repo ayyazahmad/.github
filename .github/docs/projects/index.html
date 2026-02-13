@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AzAd - All Projects & Tools Showcase">
+  
+  <title>Projects - AzAd</title>
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="../assets/css/themes.css">
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <link rel="stylesheet" href="../assets/css/animations.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+  
+  <style>
+    /* Projects page specific styles */
+    .projects-header {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+      border-radius: 0 0 16px 16px;
+      margin-bottom: 3rem;
+    }
+
+    .projects-header h1 {
+      font-size: clamp(2rem, 6vw, 3rem);
+      margin: 0;
+      animation: fadeInDown 0.6s ease-out;
+    }
+
+    .projects-header p {
+      font-size: 1rem;
+      margin: 1rem 0 0;
+      opacity: 0.95;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 1rem;
+      margin: 2rem 0;
+      border-bottom: 2px solid var(--color-border);
+      overflow-x: auto;
+      padding-bottom: 1rem;
+    }
+
+    .filter-btn {
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      color: var(--color-light-text);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .filter-btn:hover {
+      color: var(--color-primary);
+    }
+
+    .filter-btn.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .project-item {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      animation: cardSlideUp 0.5s ease-out;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-item:hover {
+      border-color: var(--color-primary);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      transform: translateY(-8px);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-icon {
+      font-size: 2.5rem;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .project-info h3 {
+      margin: 0 0 0.25rem;
+      color: var(--color-primary);
+      font-size: 1.2rem;
+    }
+
+    .project-category {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: var(--color-primary);
+      color: white;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-description {
+      color: var(--color-light-text);
+      margin: 1rem 0;
+      flex-grow: 1;
+      line-height: 1.6;
+    }
+
+    .project-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .feature-tag {
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--color-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 16px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .project-link {
+      padding: 0.75rem 1.25rem;
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .project-link:hover {
+      background: var(--color-secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .project-link.secondary {
+      background: transparent;
+      border: 2px solid var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .project-link.secondary:hover {
+      background: var(--color-primary);
+      color: white;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--color-light-text);
+    }
+
+    .empty-state h3 {
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+    }
+
+    .stats-summary {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .stat-box h4 {
+      color: var(--color-primary);
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    .stat-box p {
+      color: var(--color-light-text);
+      margin: 0.5rem 0 0;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .projects-header {
+        padding: 2rem 1rem;
+      }
+
+      .filter-tabs {
+        gap: 0.5rem;
+      }
+
+      .filter-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .project-links {
+        flex-direction: column;
+      }
+
+      .project-link {
+        width: 100%;
+        min-width: unset;
+      }
+
+      .stats-summary {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="/" class="navbar-brand">
+        <span class="brand-icon">🚀</span> AzAd
+      </a>
+      <ul class="navbar-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/donate/">Donate</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/team/">Team</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="projects-header">
+    <h1>Our Projects</h1>
+    <p>A collection of open source tools and browser extensions</p>
+  </div>
+
+  <main class="container">
+    <!-- Stats -->
+    <div class="stats-summary">
+      <div class="stat-box">
+        <h4 id="total-projects">0</h4>
+        <p>Total Projects</p>
+      </div>
+      <div class="stat-box">
+        <h4 id="total-features">0</h4>
+        <p>Features</p>
+      </div>
+      <div class="stat-box">
+        <h4>100%</h4>
+        <p>Open Source</p>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="browser">🔧 Browser Extensions</button>
+      <button class="filter-btn" data-filter="wordpress">📱 WordPress Plugins</button>
+      <button class="filter-btn" data-filter="utilities">⚙️ Utilities</button>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="projects-grid" id="projects-grid"></div>
+
+    <!-- No results -->
+    <div class="empty-state" id="empty-state" style="display:none;">
+      <h3>No projects found</h3>
+      <p>Check back soon for more projects!</p>
+    </div>
+
+    <!-- Additional Info -->
+    <div style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); color: white; padding: 2rem; border-radius: 12px; margin: 3rem 0; text-align: center;">
+      <h3>Want to Contribute?</h3>
+      <p>All our projects are open source! Fork us on GitHub and send a pull request.</p>
+      <a href="https://github.com/ayyazahmad" target="_blank" class="btn btn-primary" style="background: white; color: var(--color-primary); margin-top: 1rem;">Visit GitHub</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/projects/">All Projects</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://github.com/ayyazahmad" target="_blank">GitHub</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="/donate/">Support Us</a></li>
+          <li><a href="mailto:ayyaz@azad.co">Contact</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Privacy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">License</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-links">
+          <a href="https://github.com/ayyazahmad" target="_blank" title="GitHub">GitHub</a>
+          <a href="https://twitter.com/ayyazahmad" target="_blank" title="Twitter">Twitter</a>
+          <a href="mailto:ayyaz@azad.co" title="Email">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 AzAd. All rights reserved. Made with ❤️ by the community.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/theme-switcher.js"></script>
+  <script src="../assets/js/utils.js"></script>
+
+  <script>
+    let allProjects = PROJECTS_DATA || [];
+    let currentFilter = 'all';
+
+    function renderProjects(filter = 'all') {
+      const grid = document.getElementById('projects-grid');
+      const emptyState = document.getElementById('empty-state');
+      
+      grid.innerHTML = '';
+
+      const filtered = filter === 'all' 
+        ? allProjects 
+        : allProjects.filter(p => p.category === filter);
+
+      if (filtered.length === 0) {
+        emptyState.style.display = 'block';
+        document.getElementById('total-projects').textContent = '0';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      document.getElementById('total-projects').textContent = allProjects.length;
+
+      let totalFeatures = 0;
+      allProjects.forEach(p => {
+        totalFeatures += p.features.length;
+      });
+      document.getElementById('total-features').textContent = totalFeatures;
+
+      filtered.forEach((project, idx) => {
+        const card = document.createElement('div');
+        card.className = 'project-item';
+        card.style.animationDelay = `${idx * 0.05}s`;
+
+        const linksHTML = `
+          <div class="project-links">
+            ${project.links.github ? `<a href="${project.links.github}" target="_blank" class="project-link">GitHub</a>` : ''}
+            ${project.links.store ? `<a href="${project.links.store}" target="_blank" class="project-link secondary">Store</a>` : ''}
+          </div>
+        `;
+
+        card.innerHTML = `
+          <div class="project-header">
+            <div class="project-icon">${project.icon}</div>
+            <div class="project-info">
+              <h3>${project.name}</h3>
+              <span class="project-category">${project.category}</span>
+            </div>
+          </div>
+          <p class="project-description">${project.description}</p>
+          ${project.features && project.features.length > 0 ? `
+            <div class="project-features">
+              ${project.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
+            </div>
+          ` : ''}
+          ${linksHTML}
+        `;
+
+        grid.appendChild(card);
+      });
+
+      trackEvent('projects', 'filter_changed', filter);
+    }
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        renderProjects(currentFilter);
+      });
+    });
+
+    // Initial render
+    renderProjects();
+
+    trackPageView('Projects');
+  </script>
+</body>
+</html>

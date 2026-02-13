@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AzAd - Open Source Tools & Browser Extensions">
+  <meta name="keywords" content="developer tools, browser extensions, open source, pakistan">
+  <meta name="author" content="Ayyaz Ahmad">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@900&display=swap"
+    rel="stylesheet">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://azad.co">
+  <meta property="og:title" content="AzAd - Open Source Tools">
+  <meta property="og:description" content="Supporting open source development">
+  <meta property="og:image" content="/assets/images/og-image.png">
+
+  <title>AzAd - Supporting Open Source</title>
+
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="./assets/css/themes.css">
+  <link rel="stylesheet" href="./assets/css/global.css">
+  <link rel="stylesheet" href="./assets/css/animations.css">
+  <link rel="stylesheet" href="./assets/css/responsive.css">
+  <style>
+    /* Hero page specific styles */
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--color-border);
+    }
+
+    .brand-info {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--color-light-text);
+    }
+
+    .brand-tagline {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .search-kbt {
+      font-size: 0.7rem;
+      background: var(--color-border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      opacity: 0.6;
+    }
+
+    .hero-section {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--color-dark-bg);
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60vw;
+      height: 60vw;
+      background: radial-gradient(circle, rgba(15, 118, 110, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-content {
+      text-align: center;
+      z-index: 2;
+      max-width: 900px;
+      padding: 4rem;
+      border-radius: 32px;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(15, 118, 110, 0.1);
+      border: 1px solid rgba(15, 118, 110, 0.2);
+      color: var(--color-primary);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-family: var(--font-display);
+      font-weight: 900;
+      margin: 0 0 1.5rem;
+      color: var(--color-light-text);
+      line-height: 1.1;
+      letter-spacing: -2px;
+    }
+
+    .hero-content p {
+      font-size: 1.4rem;
+      color: var(--color-light-text);
+      opacity: 0.8;
+      margin: 0 auto 3rem;
+      line-height: 1.6;
+      max-width: 600px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    .btn-hero {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: 2px solid white;
+      background: white;
+      color: var(--color-primary);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-hero:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-hero.secondary {
+      background: transparent;
+      color: white;
+    }
+
+    .btn-hero.secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 4rem 2rem;
+      padding: 3rem;
+      background: var(--color-card-bg);
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    .stat-item {
+      text-align: center;
+      animation: cardSlideUp 0.6s ease-out;
+    }
+
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 800;
+      font-family: var(--font-display);
+      color: var(--color-primary);
+      margin: 0;
+      letter-spacing: -2px;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--color-light-text);
+      opacity: 0.6;
+      margin-top: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+    }
+
+    .projects-section {
+      margin: 8rem 2rem;
+      padding: 0;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-family: var(--font-display);
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 4rem;
+      color: var(--color-light-text);
+      letter-spacing: -1px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .project-card {
+      padding: 2.5rem;
+      border-radius: 24px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      animation: cardSlideUp 0.6s ease-out;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      border-color: var(--color-primary);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .project-icon-wrapper {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      border-radius: 16px;
+    }
+
+    .project-meta h3 {
+      font-size: 1.5rem;
+      color: var(--color-light-text);
+      margin: 0 !important;
+    }
+
+    .category-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .project-card p {
+      color: var(--color-light-text);
+      opacity: 0.7;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0;
+      flex-grow: 1;
+    }
+
+    .project-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      color: white;
+      padding: 6rem 2rem;
+      text-align: center;
+      border-radius: 32px;
+      margin: 8rem 2rem;
+      animation: fadeIn 1s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+      animation: pulse 10s infinite;
+    }
+
+    .cta-section h2 {
+      font-size: 3rem;
+      font-family: var(--font-display);
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      letter-spacing: -1px;
+    }
+
+    .cta-section p {
+      font-size: 1.25rem;
+      margin-bottom: 3rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 768px) {
+      .navbar-container {
+        padding: 0.75rem 1rem;
+      }
+
+      .nav-search {
+        display: none;
+      }
+
+      .hero-content {
+        padding: 3rem 1.5rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .btn-hero {
+        width: 100%;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        padding: 2.5rem 1.5rem;
+        margin: 4rem 1rem;
+      }
+
+      .stat-number {
+        font-size: 2.25rem;
+      }
+
+      .section-title {
+        font-size: 2.25rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+      }
+
+      .cta-section {
+        padding: 4rem 1.5rem;
+        margin: 4rem 1rem;
+      }
+
+      .cta-section h2 {
+        font-size: 2.25rem;
+      }
+    }
+  </style>
+</head>
+
+<button class="minimized-toggle" id="minimizedToggle" aria-label="Open menu">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-light-text)" stroke-width="2">
+    <line x1="3" y1="12" x2="21" y2="12"></line>
+    <line x1="3" y1="6" x2="21" y2="6"></line>
+    <line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</button>
+
+<!-- Scroll to Top Button -->
+<button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M18 15l-6-6-6 6" />
+  </svg>
+</button>
+
+<!-- Advanced Navigation -->
+<nav class="navbar glass-nav" role="navigation" aria-label="Main site navigation">
+  <div class="navbar-container">
+    <div class="nav-left">
+      <a href="/" class="navbar-brand">
+        <div class="brand-logo glass-effect">🚀</div>
+        <div class="brand-info">
+          <span class="brand-text">AzAd</span>
+          <span class="brand-tagline">Open Source Tools</span>
+        </div>
+      </a>
+
+      <div class="nav-search" role="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          style="opacity:0.7;">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="search" placeholder="Search projects, docs..." id="siteSearch">
+        <span class="search-kbt">⌘K</span>
+      </div>
+    </div>
+
+    <ul class="navbar-menu" id="mainMenu">
+      <li><a href="/" class="active">Home</a></li>
+      <li><a href="/projects/">Projects</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/faq/">FAQ</a></li>
+      <li><a href="/team/">Team</a></li>
+      <li><a href="/donate/">Donate</a></li>
+    </ul>
+
+    <div class="nav-ctas">
+      <a class="btn-primary" href="/donate/">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path
+            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+          </path>
+        </svg>
+        Support
+      </a>
+    </div>
+
+    <button class="nav-toggle" aria-label="Toggle menu" id="navToggle">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-glow"></div>
+  <div class="hero-content glass-card">
+    <div class="hero-badge">Available Now</div>
+    <h1>Building the Future of <span class="accent-text">Open Source</span></h1>
+    <p>Powerful developer tools and browser extensions designed for efficiency, privacy, and the community.</p>
+    <div class="hero-buttons">
+      <a href="/projects/" class="btn-hero">
+        Explore Projects
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+      <a href="/donate/" class="btn-hero secondary">Support Our Work</a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-grid glass-card">
+  <div class="stat-item">
+    <p class="stat-number" data-count="50000">50,000</p>
+    <p class="stat-label">Active Users</p>
+  </div>
+  <div class="stat-item">
+    <p class="stat-number" data-count="6">6</p>
+    <p class="stat-label">Tools & Extensions</p>
+  </div>
+  <div class="stat-item">
+    <p class="stat-number" data-count="100">100</p>
+    <p class="stat-label">Countries Reached</p>
+  </div>
+  <div class="stat-item">
+    <p class="stat-number" data-count="5">5</p>
+    <p class="stat-label">Years of Dev</p>
+  </div>
+</section>
+
+<!-- Featured Projects -->
+<section class="projects-section">
+  <h2 class="section-title">Featured Projects</h2>
+  <div class="projects-grid" id="featured-projects"></div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <h2>Ready to Support?</h2>
+  <p>Your contribution helps us continue building free tools for developers worldwide and keeping the internet open
+    for everyone.</p>
+  <a href="/donate/" class="btn-primary" style="padding: 1.25rem 2.5rem; font-size: 1.1rem;">Explore Support
+    Options</a>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/projects/">All Projects</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="https://github.com/ayyazahmad" target="_blank">GitHub</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="/donate/">Support Us</a></li>
+        <li><a href="mailto:ayyaz@azad.co">Contact</a></li>
+        <li><a href="#">Security</a></li>
+        <li><a href="#">Privacy</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">License</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Connect</h4>
+      <div class="social-links">
+        <a href="https://github.com/ayyazahmad" target="_blank" title="GitHub">GitHub</a>
+        <a href="https://twitter.com/ayyazahmad" target="_blank" title="Twitter">Twitter</a>
+        <a href="mailto:ayyaz@azad.co" title="Email">Email</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 AzAd. All rights reserved. Made with ❤️ by the community.</p>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="./assets/js/config.js"></script>
+<script src="./assets/js/theme-switcher.js"></script>
+<script src="./assets/js/utils.js"></script>
+
+<script>
+  // Navigation Interactivity
+  const navToggle = document.getElementById('navToggle');
+  const mainMenu = document.getElementById('mainMenu');
+  const siteSearch = document.getElementById('siteSearch');
+  const navbar = document.querySelector('.navbar');
+  const minimizedToggle = document.getElementById('minimizedToggle');
+  const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+  // Mobile Menu Toggle
+  if (navToggle && mainMenu) {
+    navToggle.addEventListener('click', () => {
+      mainMenu.classList.toggle('show');
+      navToggle.classList.toggle('active');
+      navbar.classList.toggle('open');
+    });
+  }
+
+  // Minimized Toggle Logic
+  if (minimizedToggle) {
+    minimizedToggle.addEventListener('click', () => {
+      navbar.classList.remove('hidden');
+      minimizedToggle.classList.remove('visible');
+      // If on mobile, also open the menu
+      if (window.innerWidth <= 880) {
+        mainMenu.classList.add('show');
+        navbar.classList.add('open');
+      }
+    });
+  }
+
+  // Scroll Logic
+  let lastScrollY = window.scrollY;
+
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+
+    // Navbar Hiding/Showing
+    if (currentScrollY > 100) {
+      if (currentScrollY > lastScrollY) {
+        // Scrolling Down -> Hide Navbar, Show Minimized Toggle
+        navbar.classList.add('hidden');
+        minimizedToggle?.classList.add('visible');
+      } else {
+        // Scrolling Up -> Show Navbar, Hide Minimized Toggle
+        navbar.classList.remove('hidden');
+        minimizedToggle?.classList.remove('visible');
+      }
+    } else {
+      // At top -> Show Navbar, Hide Minimized Toggle
+      navbar.classList.remove('hidden');
+      minimizedToggle?.classList.remove('visible');
+    }
+
+    // Scroll to Top Button Visibility
+    if (currentScrollY > 300) {
+      scrollTopBtn?.classList.add('visible');
+    } else {
+      scrollTopBtn?.classList.remove('visible');
+    }
+
+    lastScrollY = currentScrollY;
+  }, { passive: true });
+
+  // Scroll to Top Action
+  scrollTopBtn?.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  // Search Shortcut (Meta+K or Ctrl+K)
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      siteSearch?.focus();
+      // Ensure navbar is visible when searching
+      navbar.classList.remove('hidden');
+    }
+  });
+
+  // Populate featured projects with enhanced layout
+  const featuredContainer = document.getElementById('featured-projects');
+  if (window.PROJECTS_DATA && featuredContainer) {
+    const featured = PROJECTS_DATA.slice(0, 3);
+    featured.forEach((project, idx) => {
+      const card = document.createElement('div');
+      card.className = 'project-card glass-card';
+      card.style.animationDelay = `${idx * 0.1}s`;
+      card.innerHTML = `
+          <div class="project-header">
+            <div class="project-icon-wrapper glass-effect">${project.icon}</div>
+            <div class="project-meta">
+              <h3>${project.name}</h3>
+              <span class="category-badge">${project.category}</span>
+            </div>
+          </div>
+          <p>${project.description}</p>
+          <div class="project-footer">
+            <div class="project-links">
+              ${project.links.github ? `<a href="${project.links.github}" target="_blank" class="btn btn-small">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                GitHub</a>` : ''}
+              ${project.links.store ? `<a href="${project.links.store}" target="_blank" class="btn btn-small secondary">Store</a>` : ''}
+            </div>
+          </div>
+        `;
+      featuredContainer.appendChild(card);
+    });
+  }
+
+  // Animate counter numbers on scroll
+  const observerOptions = {
+    threshold: 0.5
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.animated) {
+        const number = parseInt(entry.target.dataset.count);
+        animateCounter(entry.target, number);
+        entry.target.animated = true;
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('[data-count]').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Track page view
+  trackPageView('Home');
+</script>
+</body>
+
+</html>

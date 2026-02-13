@@ -1,0 +1,123 @@
+/* ============================================
+   AZAD THEMES - All 5 Color Palettes
+   ============================================ */
+
+/* ============================================
+   THEME 1: Tech Modern (DEFAULT)
+   Professional & Modern - Teal + Purple
+   ============================================ */
+[data-theme="tech-modern"] {
+   --color-primary: #0F766E;
+   --color-secondary: #7B4AED;
+   --color-accent: #FDB022;
+   --color-dark-bg: #0F172A;
+   --color-light-text: #F1F5F9;
+   --color-light-bg: #1E293B;
+   --color-border: #334155;
+   --color-card-bg: rgba(30, 41, 59, 0.8);
+   --color-hover: rgba(15, 118, 110, 0.1);
+   --gradient-primary: linear-gradient(135deg, #0F766E, #7B4AED);
+   --footer-bg: rgba(17, 24, 39, 0.92);
+   --footer-foreground: #E6EEF2;
+}
+
+/* ============================================
+   THEME 2: Green Growth
+   Sustainable & Community - Emerald + Blue
+   ============================================ */
+[data-theme="green-growth"] {
+   --color-primary: #10B981;
+   --color-secondary: #3B82F6;
+   --color-accent: #F59E0B;
+   --color-dark-bg: #1F2937;
+   --color-light-text: #F3F4F6;
+   --color-light-bg: #111827;
+   --color-border: #374151;
+   --color-card-bg: rgba(17, 24, 39, 0.8);
+   --color-hover: rgba(16, 185, 129, 0.1);
+   --gradient-primary: linear-gradient(135deg, #10B981, #3B82F6);
+   --footer-bg: rgba(17, 24, 39, 0.92);
+   --footer-foreground: #F3F4F6;
+}
+
+/* ============================================
+   THEME 3: Sunset Pakistan
+   Cultural Identity - Red + Blue (Flag colors)
+   ============================================ */
+[data-theme="sunset-pakistan"] {
+   --color-primary: #DC2626;
+   --color-secondary: #1E40AF;
+   --color-accent: #FBBF24;
+   --color-dark-bg: #1F2937;
+   --color-light-text: #F9FAFB;
+   --color-light-bg: #111827;
+   --color-border: #4B5563;
+   --color-card-bg: rgba(17, 24, 39, 0.9);
+   --color-hover: rgba(220, 38, 38, 0.15);
+   --gradient-primary: linear-gradient(135deg, #DC2626, #1E40AF);
+   --footer-bg: rgba(17, 24, 39, 0.92);
+   --footer-foreground: #F9FAFB;
+}
+
+/* ============================================
+   THEME 4: Minimalist
+   Elegant & Timeless - Black & White
+   ============================================ */
+[data-theme="minimalist"] {
+   --color-primary: #000000;
+   --color-secondary: #FFFFFF;
+   --color-accent: #EC4899;
+   --color-dark-bg: #1F2937;
+   --color-light-text: #F3F4F6;
+   --color-light-bg: #111827;
+   --color-border: #4B5563;
+   --color-card-bg: rgba(31, 41, 55, 0.8);
+   --color-hover: rgba(0, 0, 0, 0.1);
+   --gradient-primary: linear-gradient(135deg, #000000, #FFFFFF);
+   /* Minimalist should support a light footer for the "light" scheme */
+   --footer-bg: #F8FAFC;
+   --footer-foreground: #0F172A;
+   /* provide light-mode overrides when data-scheme="light" is set */
+}
+
+/* ============================================
+   THEME 5: Cyberpunk
+   Bold & Eye-Catching - Cyan + Magenta
+   ============================================ */
+[data-theme="cyberpunk"] {
+   --color-primary: #00D9FF;
+   --color-secondary: #FF006E;
+   --color-accent: #FFBE0B;
+   --color-dark-bg: #0A0E27;
+   --color-light-text: #FFFFFF;
+   --color-light-bg: #1A1F3A;
+   --color-border: #00D9FF;
+   --color-card-bg: rgba(26, 31, 58, 0.9);
+   --color-hover: rgba(0, 217, 255, 0.15);
+   --gradient-primary: linear-gradient(135deg, #00D9FF, #FF006E);
+   --footer-bg: rgba(26, 31, 58, 0.92);
+   --footer-foreground: #FFFFFF;
+}
+
+/* ============================================
+   LIGHT SCHEME OVERRIDES
+   Must be last to override theme defaults
+   ============================================ */
+[data-scheme="light"] {
+   --color-dark-bg: #FFFFFF;
+   --color-light-text: #0F172A;
+   /* Dark slate for primary text */
+   --color-light-bg: #F1F5F9;
+   --color-card-bg: rgba(255, 255, 255, 0.85);
+   /* Slightly opaque white */
+   --color-border: #CBD5E1;
+   /* Darker border for visibility */
+   --color-hover: rgba(15, 118, 110, 0.1);
+   --footer-bg: #F8FAFC;
+   --footer-foreground: #0F172A;
+
+   /* Glassmorphism adjustments for light mode */
+   --glass-bg: rgba(255, 255, 255, 0.85);
+   --glass-border: rgba(15, 23, 42, 0.1);
+   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}

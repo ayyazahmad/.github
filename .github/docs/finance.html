@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en" data-scheme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Demo | Canvas Template Replica</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Raleway:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/themes.css">
+    <link rel="stylesheet" href="./assets/css/global.css">
+    <link rel="stylesheet" href="./assets/css/animations.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+
+    <style>
+        /* Finance-specific overrides */
+        :root {
+            --font-family: 'Lato', sans-serif;
+            --font-display: 'Raleway', sans-serif;
+            --color-finance-primary: #1ABC9C;
+            --color-finance-dark: #34495E;
+            --color-finance-text: #555555;
+        }
+
+        body {
+            background-color: #FFFFFF;
+            color: var(--color-finance-text);
+            font-family: var(--font-family);
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background-color: var(--color-finance-dark);
+            color: #EEE;
+            padding: 10px 0;
+            font-size: 0.85rem;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            /* Custom container for this page */
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .top-bar a {
+            color: #BBB;
+            margin-left: 15px;
+        }
+
+        .top-bar a:hover {
+            color: #FFF;
+        }
+
+        /* Header */
+        .finance-header {
+            background: #FFF;
+            border-bottom: 1px solid #EEE;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .finance-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #333;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-finance-primary);
+        }
+
+        /* Hero */
+        .finance-hero {
+            padding: 100px 0;
+            background: #F9F9F9;
+            display: flex;
+            align-items: center;
+            min-height: 600px;
+        }
+
+        .finance-hero .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            color: #333;
+            font-size: 48px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #777;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: right;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .subscribe-form input {
+            padding: 12px 20px;
+            border: 1px solid #DDD;
+            border-radius: 4px;
+            flex: 1;
+        }
+
+        .btn-finance {
+            background: var(--color-finance-primary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-finance:hover {
+            background: #16A085;
+        }
+
+        /* Features Grid */
+        .features-section {
+            padding: 80px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .feature-item {
+            padding: 30px;
+            border: 1px solid #EEE;
+            border-radius: 4px;
+            transition: transform 0.3s;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            color: var(--color-finance-primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-item h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .feature-item p {
+            color: #777;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 80px 0;
+            background: #F9F9F9;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            gap: 50px;
+        }
+
+        .content-text {
+            flex: 1;
+        }
+
+        .content-image {
+            flex: 1;
+        }
+
+        .section-heading {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        .finance-footer {
+            background: #333;
+            color: #AAA;
+            padding: 60px 0;
+            font-size: 14px;
+        }
+
+        .finance-footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            grid-template-columns: repeat(4, 1fr);
+            display: grid;
+            gap: 30px;
+            padding: 0 15px;
+        }
+
+        .finance-footer h4 {
+            color: #FFF;
+            margin-bottom: 20px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .finance-footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .finance-footer li {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+
+        .finance-footer a {
+            color: #AAA;
+        }
+
+        .finance-footer a:hover {
+            color: var(--color-finance-primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="contact-info">
+                <span>📞 (0) 8547 632521</span>
+                <span style="margin-left: 20px;">📧 info@canvas.com</span>
+            </div>
+            <div class="social-links">
+                <a href="#">About</a>
+                <a href="#">FAQs</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="finance-header">
+        <div class="container">
+            <div class="logo">CANVAS<span style="color: var(--color-finance-primary);">.</span></div>
+            <nav class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">What We Do</a>
+                <a href="#">Services</a>
+                <a href="#">News</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="finance-hero">
+        <div class="container">
+            <div class="hero-text">
+                <h1>Best way to save your Money.</h1>
+                <p>Interactively seize bricks-and-clicks channels before empowered users. Uniquely maximize
+                    bleeding-edge outsourcing.</p>
+                <div class="subscribe-form">
+                    <input type="email" placeholder="Enter your Email">
+                    <button class="btn-finance">Get Started</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="Finance Team">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">💼</div>
+                    <h3>Financial Services</h3>
+                    <p>Globally mesh multifunctional without competitive benefits. Synergistically procrastinate
+                        effective.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h3>Audit & Taxes</h3>
+                    <p>Appropriately parallel task mission-critical communities after team building quality vectors
+                        seamless.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📈</div>
+                    <h3>Business Planning</h3>
+                    <p>Globally deploy cost effective internal, consectetur adipisicing elit. Eligendi rem, facilis
+                        nobis.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">👥</div>
+                    <h3>Accountants Experts</h3>
+                    <p>Globally mesh multifunctional without competitive benefits. Synergistically procrastinate
+                        effective.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🌐</div>
+                    <h3>International Markets</h3>
+                    <p>Appropriately parallel task mission-critical communities after team building quality vectors
+                        seamless.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💹</div>
+                    <h3>Stocks & Trades</h3>
+                    <p>Globally deploy cost effective internal, consectetur adipisicing elit. Eligendi rem, facilis
+                        nobis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content-section">
+        <div class="content-container">
+            <div class="content-text">
+                <div style="color: var(--color-finance-primary); font-weight: 700; margin-bottom: 10px;">What We Do
+                </div>
+                <h2 class="section-heading">Beware of Little Expenses, a small leak will sink a Great Ship.</h2>
+                <p style="color: #777; line-height: 1.8; margin-bottom: 20px;">
+                    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam, unde. Numquam officia fuga sequi
+                    fugiat ipsa aperiam dolorem quam reprehenderit."
+                </p>
+                <p style="color: #777; line-height: 1.8;">
+                    Proactively envisioned multimedia based expertise and cross-media growth strategies. Seamlessly
+                    visualize quality intellectual capital without superior collaboration and idea-sharing.
+                </p>
+            </div>
+            <div class="content-image">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="Analysis" style="width: 100%; border-radius: 8px;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="finance-footer">
+        <div class="container">
+            <div>
+                <h4>About Canvas</h4>
+                <p style="line-height: 1.6;">We believe in Simple, Creative & Flexible Design Standards.</p>
+                <div style="margin-top: 20px;">
+                    <p><strong>HQ:</strong> 795 Folsom Ave, Suite 600<br>San Francisco, CA 94107</p>
+                </div>
+            </div>
+            <div>
+                <h4>Recent Posts</h4>
+                <ul>
+                    <li><a href="#">Lorem ipsum dolor sit amet</a></li>
+                    <li><a href="#">Elit consectetur adipisicing</a></li>
+                    <li><a href="#">Praesentium voluptatum</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Useful Links</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Newsletter</h4>
+                <p>Subscribe to Our Newsletter to get Important News, Amazing Offers & Inside Scoops:</p>
+                <div style="display: flex; margin-top: 15px;">
+                    <input type="email" placeholder="Email Address" style="padding: 10px; border: none; width: 100%;">
+                    <button
+                        style="background: var(--color-finance-primary); border: none; color: white; padding: 0 15px; cursor: pointer;">Go</button>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #444;">
+            Copyrights &copy; 2024 All Rights Reserved by Canvas Inc.
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Team - Meet the people behind AzAd">
+  
+  <title>Team - AzAd</title>
+  
+  <link rel="stylesheet" href="../assets/css/themes.css">
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <link rel="stylesheet" href="../assets/css/animations.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+  
+  <style>
+    .team-header {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+      border-radius: 0 0 16px 16px;
+      margin-bottom: 3rem;
+    }
+
+    .team-header h1 {
+      font-size: clamp(2rem, 6vw, 3rem);
+      margin: 0;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .team-member {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      animation: cardSlideUp 0.5s ease-out;
+    }
+
+    .team-member:hover {
+      border-color: var(--color-primary);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      transform: translateY(-8px);
+    }
+
+    .member-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 1rem;
+      color: white;
+    }
+
+    .team-member h3 {
+      color: var(--color-primary);
+      margin: 0 0 0.5rem;
+    }
+
+    .member-role {
+      color: var(--color-secondary);
+      font-weight: 600;
+      margin: 0 0 1rem;
+      font-size: 0.95rem;
+    }
+
+    .member-bio {
+      color: var(--color-light-text);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .member-links {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-icon:hover {
+      background: var(--color-secondary);
+      transform: scale(1.15) rotate(10deg);
+    }
+
+    .lead-section {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      color: white;
+      padding: 3rem 2rem;
+      border-radius: 12px;
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .lead-section h2 {
+      margin-top: 0;
+    }
+
+    .lead-profile {
+      background: rgba(255,255,255,0.1);
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .lead-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      margin: 0 auto 1rem;
+      border: 3px solid white;
+    }
+
+    .lead-profile h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    .lead-role {
+      font-size: 1.1rem;
+      margin: 0 0 1.5rem;
+      opacity: 0.95;
+    }
+
+    .lead-bio {
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .team-header {
+        padding: 2rem 1rem;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .lead-section {
+        padding: 2rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="/" class="navbar-brand"><span class="brand-icon">🚀</span> AzAd</a>
+      <ul class="navbar-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/donate/">Donate</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/team/">Team</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="team-header">
+    <h1>Meet the Team</h1>
+    <p>Passionate developers building tools for the community</p>
+  </div>
+
+  <main class="container">
+    <!-- Lead Developer -->
+    <section class="lead-section">
+      <h2>Lead Developer</h2>
+      <div class="lead-profile">
+        <div class="lead-avatar">👨‍💻</div>
+        <h3>Ayyaz Ahmad</h3>
+        <p class="lead-role">Founder & Lead Developer</p>
+        <p class="lead-bio">
+          Full-stack developer with 5+ years experience building open source tools. 
+          Passionate about creating developer utilities that make coding easier.
+        </p>
+        <div class="member-links">
+          <a href="https://github.com/ayyazahmad" target="_blank" class="social-icon" title="GitHub">🔗</a>
+          <a href="https://twitter.com/ayyazahmad" target="_blank" class="social-icon" title="Twitter">𝕏</a>
+          <a href="mailto:ayyaz@azad.co" class="social-icon" title="Email">✉️</a>
+          <a href="https://linkedin.com/in/ayyazahmad" target="_blank" class="social-icon" title="LinkedIn">💼</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contributors -->
+    <section>
+      <h2 style="text-align: center; color: var(--color-primary); margin-bottom: 2rem;">Contributors</h2>
+      <div class="empty-state">
+        <p>We are looking for passionate developers to contribute to AzAd projects!</p>
+        <p style="margin-top: 1.5rem;">
+          <a href="/faq/" style="color: var(--color-primary); text-decoration: none; font-weight: 600;">Learn how to contribute →</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- How to Join -->
+    <div style="background: var(--color-card-bg); border: 2px solid var(--color-primary); padding: 2rem; border-radius: 12px; margin: 3rem 0; text-align: center;">
+      <h3 style="color: var(--color-primary); margin-top: 0;">Want to Join?</h3>
+      <p>We welcome contributions from developers of all skill levels. Check out our GitHub for open issues and ways to contribute.</p>
+      <a href="https://github.com/ayyazahmad" target="_blank" class="btn btn-primary" style="display: inline-block; margin-top: 1rem;">View GitHub</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/projects/">All Projects</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://github.com/ayyazahmad" target="_blank">GitHub</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="/donate/">Support Us</a></li>
+          <li><a href="mailto:ayyaz@azad.co">Contact</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Privacy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">License</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-links">
+          <a href="https://github.com/ayyazahmad" target="_blank">GitHub</a>
+          <a href="https://twitter.com/ayyazahmad" target="_blank">Twitter</a>
+          <a href="mailto:ayyaz@azad.co">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 AzAd. All rights reserved. Made with ❤️ by the community.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/theme-switcher.js"></script>
+  <script src="../assets/js/utils.js"></script>
+
+  <script>
+    trackPageView('Team');
+  </script>
+</body>
+</html>

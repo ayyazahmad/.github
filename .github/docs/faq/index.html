@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FAQ - Frequently Asked Questions about AzAd support and donations">
+  
+  <title>FAQ - AzAd Support</title>
+  
+  <link rel="stylesheet" href="../assets/css/themes.css">
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <link rel="stylesheet" href="../assets/css/animations.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+  
+  <style>
+    .faq-header {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+      border-radius: 0 0 16px 16px;
+      margin-bottom: 3rem;
+    }
+
+    .faq-header h1 {
+      font-size: clamp(2rem, 6vw, 3rem);
+      margin: 0;
+    }
+
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      animation: cardSlideUp 0.5s ease-out;
+    }
+
+    .faq-question {
+      padding: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      transition: all 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: rgba(0,0,0,0.05);
+    }
+
+    .faq-toggle {
+      min-width: 24px;
+      text-align: right;
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-toggle {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+    }
+
+    .faq-answer-content {
+      padding: 0 1.5rem 1.5rem;
+      color: var(--color-light-text);
+      line-height: 1.8;
+    }
+
+    .faq-answer-content a {
+      color: var(--color-secondary);
+      text-decoration: underline;
+    }
+
+    .faq-answer-content a:hover {
+      color: var(--color-primary);
+    }
+
+    @media (max-width: 768px) {
+      .faq-header {
+        padding: 2rem 1rem;
+      }
+
+      .faq-question {
+        padding: 1rem;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="/" class="navbar-brand"><span class="brand-icon">🚀</span> AzAd</a>
+      <ul class="navbar-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/donate/">Donate</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/team/">Team</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="faq-header">
+    <h1>Frequently Asked Questions</h1>
+    <p>Get answers to common questions about supporting AzAd</p>
+  </div>
+
+  <main class="container">
+    <div class="faq-container" id="faq-container"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/projects/">All Projects</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://github.com/ayyazahmad" target="_blank">GitHub</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="/donate/">Support Us</a></li>
+          <li><a href="mailto:ayyaz@azad.co">Contact</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Privacy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">License</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-links">
+          <a href="https://github.com/ayyazahmad" target="_blank">GitHub</a>
+          <a href="https://twitter.com/ayyazahmad" target="_blank">Twitter</a>
+          <a href="mailto:ayyaz@azad.co">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 AzAd. All rights reserved. Made with ❤️ by the community.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/theme-switcher.js"></script>
+  <script src="../assets/js/utils.js"></script>
+
+  <script>
+    const faqContainer = document.getElementById('faq-container');
+    
+    if (FAQ_DATA) {
+      FAQ_DATA.forEach((item, idx) => {
+        const faqItem = document.createElement('div');
+        faqItem.className = 'faq-item';
+        faqItem.style.animationDelay = `${idx * 0.05}s`;
+        
+        faqItem.innerHTML = `
+          <div class="faq-question">
+            <span>${item.question}</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">${item.answer}</div>
+          </div>
+        `;
+
+        faqItem.querySelector('.faq-question').addEventListener('click', () => {
+          faqItem.classList.toggle('active');
+        });
+
+        faqContainer.appendChild(faqItem);
+      });
+    }
+
+    trackPageView('FAQ');
+  </script>
+</body>
+</html>

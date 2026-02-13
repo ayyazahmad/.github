@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Support AzAd Open Source - Multiple payment methods">
+  <meta name="keywords" content="donation, support, payment, pakistan, crypto">
+  
+  <title>Support AzAd - Donate & Contribute</title>
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="../assets/css/themes.css">
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <link rel="stylesheet" href="../assets/css/animations.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+  
+  <style>
+    /* Donate page specific styles */
+    .donate-header {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+      border-radius: 0 0 16px 16px;
+      margin-bottom: 3rem;
+    }
+
+    .donate-header h1 {
+      font-size: clamp(2rem, 6vw, 3rem);
+      margin: 0;
+      animation: fadeInDown 0.6s ease-out;
+    }
+
+    .donate-header p {
+      font-size: 1.1rem;
+      margin: 1rem 0 0;
+      opacity: 0.95;
+    }
+
+    .tabs-container {
+      display: flex;
+      gap: 1rem;
+      margin: 2rem 0;
+      border-bottom: 2px solid var(--color-border);
+      overflow-x: auto;
+      padding-bottom: 1rem;
+    }
+
+    .tab-btn {
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      color: var(--color-light-text);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: var(--color-primary);
+    }
+
+    .tab-btn.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .payment-methods-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .payment-card {
+      background: var(--color-card-bg);
+      border: 2px solid var(--color-border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      animation: cardSlideUp 0.5s ease-out;
+    }
+
+    .payment-card:hover {
+      border-color: var(--color-primary);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      transform: translateY(-8px);
+    }
+
+    .payment-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .payment-card h3 {
+      color: var(--color-primary);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    .payment-card p {
+      color: var(--color-light-text);
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    .payment-details {
+      background: rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .payment-card.expanded .payment-details {
+      max-height: 500px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin: 0.5rem 0;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      font-weight: 600;
+      color: var(--color-primary);
+      flex: 0 0 140px;
+    }
+
+    .detail-value {
+      flex: 1;
+      word-break: break-all;
+      color: var(--color-light-text);
+    }
+
+    .copy-btn {
+      padding: 0.5rem 1rem;
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      flex: 0 0 auto;
+    }
+
+    .copy-btn:hover {
+      background: var(--color-secondary);
+      transform: scale(1.05);
+    }
+
+    .qr-code-section {
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+
+    .qr-thumbnail {
+      width: 120px;
+      height: 120px;
+      border: 2px solid var(--color-border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 0 auto;
+    }
+
+    .qr-thumbnail:hover {
+      border-color: var(--color-primary);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transform: scale(1.1);
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-small {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .btn-small:hover {
+      background: var(--color-secondary);
+      transform: translateY(-2px);
+    }
+
+    .btn-small.secondary {
+      background: var(--color-card-bg);
+      color: var(--color-primary);
+      border: 2px solid var(--color-primary);
+    }
+
+    .btn-small.secondary:hover {
+      background: var(--color-primary);
+      color: white;
+    }
+
+    /* Modal for QR code */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .modal.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: var(--color-card-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      animation: cardSlideUp 0.3s ease-out;
+    }
+
+    .modal-close {
+      float: right;
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
+      color: var(--color-light-text);
+      border: none;
+      background: none;
+      padding: 0;
+      width: 40px;
+      height: 40px;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      color: var(--color-primary);
+    }
+
+    .modal-qr-image {
+      max-width: 100%;
+      max-height: 400px;
+      margin: 1rem 0;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .modal-instructions {
+      text-align: left;
+      background: rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+
+    .modal-instructions ol {
+      margin: 0;
+      padding-left: 1.5rem;
+    }
+
+    .modal-instructions li {
+      margin: 0.5rem 0;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+    }
+
+    .currency-note {
+      font-size: 0.85rem;
+      color: var(--color-light-text);
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .donate-header {
+        padding: 2rem 1rem;
+      }
+
+      .payment-methods-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .tabs-container {
+        gap: 0.5rem;
+      }
+
+      .tab-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .btn-small {
+        width: 100%;
+        text-align: center;
+      }
+
+      .modal-content {
+        padding: 1.5rem;
+      }
+
+      .detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .copy-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="/" class="navbar-brand">
+        <span class="brand-icon">🚀</span> AzAd
+      </a>
+      <ul class="navbar-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/donate/">Donate</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/team/">Team</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="donate-header">
+    <h1>Support Our Mission</h1>
+    <p>Help us continue developing free tools and extensions for developers worldwide</p>
+  </div>
+
+  <main class="container">
+    <!-- Info Box -->
+    <div class="info-box">
+      <h3>💜 Why Support?</h3>
+      <p>Your donation helps us:</p>
+      <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+        <li>Develop new features faster</li>
+        <li>Maintain and improve existing tools</li>
+        <li>Provide better support & documentation</li>
+        <li>Dedicate more time to open source</li>
+      </ul>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs-container">
+      <button class="tab-btn active" data-tab="pakistan">🇵🇰 Pakistan</button>
+      <button class="tab-btn" data-tab="international">🌍 International</button>
+      <button class="tab-btn" data-tab="crypto">₿ Cryptocurrency</button>
+    </div>
+
+    <!-- Tab: Pakistan -->
+    <div class="tab-content active" data-tab="pakistan" id="pakistan">
+      <div class="payment-methods-grid" id="pakistan-methods"></div>
+    </div>
+
+    <!-- Tab: International -->
+    <div class="tab-content" data-tab="international" id="international">
+      <div class="payment-methods-grid" id="international-methods"></div>
+    </div>
+
+    <!-- Tab: Crypto -->
+    <div class="tab-content" data-tab="crypto" id="crypto">
+      <div class="payment-methods-grid" id="crypto-methods"></div>
+    </div>
+
+    <!-- Additional Info -->
+    <div class="info-box" style="margin-top: 4rem;">
+      <h3>❓ Questions?</h3>
+      <p>Check our <a href="/faq/" style="color: white; text-decoration: underline;">FAQ page</a> for more information about donations and payments.</p>
+    </div>
+  </main>
+
+  <!-- QR Code Modal -->
+  <div class="modal" id="qrModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeQRModal()">&times;</button>
+      <h3 id="qrTitle"></h3>
+      <img id="qrImage" class="modal-qr-image" src="" alt="QR Code">
+      <div id="qrInstructions" class="modal-instructions" style="display:none;">
+        <h4>How to Pay:</h4>
+        <ol id="instructionsList"></ol>
+      </div>
+      <button class="btn-small" onclick="closeQRModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/projects/">All Projects</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://github.com/ayyazahmad" target="_blank">GitHub</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="/donate/">Support Us</a></li>
+          <li><a href="mailto:ayyaz@azad.co">Contact</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Privacy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">License</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-links">
+          <a href="https://github.com/ayyazahmad" target="_blank" title="GitHub">GitHub</a>
+          <a href="https://twitter.com/ayyazahmad" target="_blank" title="Twitter">Twitter</a>
+          <a href="mailto:ayyaz@azad.co" title="Email">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 AzAd. All rights reserved. Made with ❤️ by the community.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/theme-switcher.js"></script>
+  <script src="../assets/js/utils.js"></script>
+
+  <script>
+    // Populate payment methods
+    function populatePaymentMethods(region, methods) {
+      const container = document.getElementById(`${region}-methods`);
+      if (!container || !methods) return;
+
+      methods.forEach((method, idx) => {
+        const card = document.createElement('div');
+        card.className = 'payment-card';
+        card.style.animationDelay = `${idx * 0.1}s`;
+        
+        let detailsHTML = '';
+        if (method.details) {
+          detailsHTML = `<div class="payment-details">`;
+          for (const [label, value] of Object.entries(method.details)) {
+            detailsHTML += `
+              <div class="detail-row">
+                <span class="detail-label">${label}</span>
+                <span class="detail-value">${value}</span>
+                <button class="copy-btn" onclick="copyToClipboard('${value.replace(/'/g, "\\'")}')">Copy</button>
+              </div>
+            `;
+          }
+          detailsHTML += '</div>';
+        }
+
+        let qrHTML = '';
+        if (method.qrCode) {
+          qrHTML = `
+            <div class="qr-code-section">
+              <p style="font-size: 0.9rem; margin: 0 0 0.5rem;">Quick Pay with QR Code:</p>
+              <img class="qr-thumbnail" src="../assets/qrcodes/${method.qrCode}" alt="QR Code" 
+                   onclick="openQRModal('${method.name}', '../assets/qrcodes/${method.qrCode}')">
+            </div>
+          `;
+        }
+
+        let buttonsHTML = '<div class="action-buttons">';
+        if (method.link) {
+          buttonsHTML += `<a href="${method.link}" target="_blank" class="btn-small">Pay Now</a>`;
+        }
+        if (method.qrCode) {
+          buttonsHTML += `<button class="btn-small secondary" onclick="openQRModal('${method.name}', '../assets/qrcodes/${method.qrCode}')">View QR Code</button>`;
+        }
+        buttonsHTML += '</div>';
+
+        card.innerHTML = `
+          <div class="payment-icon">${method.icon}</div>
+          <h3>${method.name}</h3>
+          <p>${method.description}</p>
+          ${qrHTML}
+          ${detailsHTML}
+          ${buttonsHTML}
+          ${method.fees ? `<p class="currency-note">Fee: ${method.fees}</p>` : ''}
+        `;
+
+        // Toggle details on click
+        card.addEventListener('click', (e) => {
+          if (!e.target.closest('button') && !e.target.closest('a')) {
+            card.classList.toggle('expanded');
+          }
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabName = btn.dataset.tab;
+        
+        // Update buttons
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Update content
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+
+        trackEvent('donate', 'tab_switched', tabName);
+      });
+    });
+
+    // QR Code modal
+    function openQRModal(title, src) {
+      const modal = document.getElementById('qrModal');
+      document.getElementById('qrTitle').textContent = title;
+      document.getElementById('qrImage').src = src;
+      modal.classList.add('show');
+      trackEvent('donate', 'qr_viewed', title);
+    }
+
+    function closeQRModal() {
+      document.getElementById('qrModal').classList.remove('show');
+    }
+
+    // Close modal on outside click
+    document.getElementById('qrModal').addEventListener('click', (e) => {
+      if (e.target.id === 'qrModal') closeQRModal();
+    });
+
+    // Populate payment methods
+    if (PAYMENTS_CONFIG) {
+      populatePaymentMethods('pakistan', PAYMENTS_CONFIG.pakistan);
+      populatePaymentMethods('international', PAYMENTS_CONFIG.international);
+      populatePaymentMethods('crypto', PAYMENTS_CONFIG.crypto);
+    }
+
+    trackPageView('Donate');
+  </script>
+</body>
+</html>
